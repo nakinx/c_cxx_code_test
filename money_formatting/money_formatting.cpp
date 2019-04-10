@@ -48,11 +48,11 @@ int main (int argc, char * argv[])
 
     try
     {
-        oLocale = std::locale(oLocaleId);
+        oLocale = std::locale(oLocaleId.c_str());
     }
-    catch (std::runtime_error)
+    catch (const std::exception & e)
     {
-        std::cout << "Locale identification invalid!" << std::endl;
+        std::cout << "Invalid locale identification! (" << e.what()  << ")"<< std::endl;
         oLocale = std::locale("");
     }
 	   
@@ -62,19 +62,27 @@ int main (int argc, char * argv[])
     std::stringstream oSsValue;
     std::stringstream oSsFormattedValue;
 
+    oSsFormattedValue.imbue(oLocale);
+
+    const std::moneypunct<char> &oMoneyPunct = std::use_facet<std::moneypunct<char> >(oSsFormattedValue.getloc());
+
+    const std::money_put<char> & oMoneyPut = std::use_facet<std::money_put<char> >(oSsFormattedValue.getloc());
+
+    // Converting original string to a numeric type.
     oSsValue << argv[1];
     oSsValue >> ldValue;
 
-    oSsFormattedValue.imbue(oLocale);
-
-    const std::moneypunct<char> &oMoneyPunct = std::use_facet<std::moneypunct<char>>(oSsFormattedValue.getloc());
-
-    const std::money_put<char> & oMoneyPut = std::use_facet<std::money_put<char>>(oSsFormattedValue.getloc());
-
+    // Formatting to monetary using locale as pattern.
     oMoneyPut.put(oSsFormattedValue, false, oSsFormattedValue, ' ', ldValue);
 
 
-    std::cout << "Formatted value: (" << oMoneyPunct.curr_symbol() << oSsFormattedValue.str() << ")" << std::endl;
+    std::cout << std::endl
+              << "Conversion results:" << std::endl << std::endl
+              << "Original string: (" << argv[1] << ")" << std::endl
+              << "Original numeric value: (" << std::fixed << ldValue << ") " << std::endl
+              << "Original formatted string value: (" << oMoneyPunct.curr_symbol() << oSsFormattedValue.str() << ")" << std::endl
+              << std::endl << std::endl;
+
 
     return 0;
 }
