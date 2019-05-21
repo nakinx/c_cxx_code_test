@@ -12,5 +12,6 @@ define: define.o
 
 clean:
 	@echo "Cleaning..."
-	rm *.o
-	rm define
+	-rm *.o
+	-rm *.ii
+	-rm define
