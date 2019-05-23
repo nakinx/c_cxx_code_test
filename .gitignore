@@ -26,6 +26,9 @@
 *.exe
 *.out
 *.app
+define
+money_formatting
+money_formatting_rouding
 
 # Logs
 *.log
@@ -38,3 +41,4 @@ tags
 
 # Preprocessed files
 *.ii
+*.s

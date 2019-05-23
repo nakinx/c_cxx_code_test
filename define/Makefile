@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-Wall -g -save-temps --std=c++11
+CXXFLAGS=-Wall -Wextra -g -save-temps --std=c++11
 
 all: intomessage define
 
@@ -14,4 +14,5 @@ clean:
 	@echo "Cleaning..."
 	-rm *.o
 	-rm *.ii
+	-rm *.s
 	-rm define
