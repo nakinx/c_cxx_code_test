@@ -28,10 +28,9 @@
 #include <sstream>
 #include <cmath>
 
-int main (int argc, char * argv[])
-{
-    if (argc < 2)
-    {
+int main (int argc,
+          char * argv[]) {
+    if (argc < 2) {
         std::cout << "Invalid arguments!" << std::endl << std::endl << "Usage: " << argv[0] << " <value> [<locale>]" << std::endl;		
     	return -1;
     }
@@ -42,17 +41,16 @@ int main (int argc, char * argv[])
 
     std::string oLocaleId;
     
-    if (argc == 3)
+    if (argc == 3) {
     	oLocaleId = argv[2];
+    }
 
     std::locale oLocale;
 
-    try
-    {
+    try {
         oLocale = std::locale(oLocaleId.c_str());
     }
-    catch (const std::exception & e)
-    {
+    catch (const std::exception & e) {
         std::cout << "Invalid locale identification! (" << e.what() << ")" << std::endl;
         oLocale = std::locale("");
     }
@@ -100,3 +98,5 @@ int main (int argc, char * argv[])
               << std::endl << std::endl;
 
     return 0;
+
+}
