@@ -1,7 +1,3 @@
-target
-*.c
-*.cpp
-*.h
-Makefile
-.gitignore
 ~
+*.o
+*.so

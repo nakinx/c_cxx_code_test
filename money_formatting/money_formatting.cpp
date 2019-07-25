@@ -24,13 +24,12 @@
 
 
 #include <iostream>
+#include <iomanip>
 #include <locale>
 #include <sstream>
 
-int main (int argc, char * argv[])
-{
-    if (argc < 2)
-    {
+int main (int argc, char * argv[]) {
+    if (argc < 2) {
         std::cout << "Invalid arguments!" << std::endl << std::endl << "Usage: " << argv[0] << " <value> [<locale>]" << std::endl;		
     	return -1;
     }
@@ -46,12 +45,10 @@ int main (int argc, char * argv[])
 
     std::locale oLocale;
 
-    try
-    {
+    try {
         oLocale = std::locale(oLocaleId.c_str());
     }
-    catch (const std::exception & e)
-    {
+    catch (const std::exception & e) {
         std::cout << "Invalid locale identification! (" << e.what()  << ")"<< std::endl;
         oLocale = std::locale("");
     }
@@ -64,7 +61,7 @@ int main (int argc, char * argv[])
 
     oSsFormattedValue.imbue(oLocale);
 
-    const std::moneypunct<char> &oMoneyPunct = std::use_facet<std::moneypunct<char> >(oSsFormattedValue.getloc());
+    const std::moneypunct<char> & oMoneyPunct = std::use_facet<std::moneypunct<char> >(oSsFormattedValue.getloc());
 
     const std::money_put<char> & oMoneyPut = std::use_facet<std::money_put<char> >(oSsFormattedValue.getloc());
 
@@ -75,14 +72,15 @@ int main (int argc, char * argv[])
     // Formatting to monetary using locale as pattern.
     oMoneyPut.put(oSsFormattedValue, false, oSsFormattedValue, ' ', ldValue);
 
+    std::string oTmp = oSsFormattedValue.str();
 
     std::cout << std::endl
               << "Conversion results:" << std::endl << std::endl
               << "Original string: (" << argv[1] << ")" << std::endl
               << "Original numeric value: (" << std::fixed << ldValue << ") " << std::endl
-              << "Original formatted string value: (" << oMoneyPunct.curr_symbol() << oSsFormattedValue.str() << ")" << std::endl
+              << "Formatted string value: (" << oMoneyPunct.curr_symbol() << oSsFormattedValue.str() << ")" << std::endl
+              << "Formatted as string: (" << std::showbase << oTmp << ")" << std::endl
               << std::endl << std::endl;
-
 
     return 0;
 }
