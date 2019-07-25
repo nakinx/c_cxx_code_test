@@ -1,3 +1,51 @@
-~
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
 *.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
 *.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Logs
+*.log
+
+# IDE
+.vscode
+
+# vim ctags 
+tags
+
+# Preprocessed files
+*.ii
+*.s
+
+# Others
+~
+
+# Executables
+define
+money_formatting
+money_formatting_rouding
+
+
