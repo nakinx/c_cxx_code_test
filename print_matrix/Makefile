@@ -1,5 +1,5 @@
 C=gcc
-CFLAGS=-Wall -g 
+CFLAGS=-Wall -g -std=c99
 
 all: into_message print_matrix
 
